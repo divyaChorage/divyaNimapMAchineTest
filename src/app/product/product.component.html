@@ -1,0 +1,84 @@
+<div class="container">
+    <!-- Add or Update Category Form -->
+    <p>products of : {{categpryName}}</p>
+
+    <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+      <div>
+        <label for="name">Product Name:</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="newProduct.name"
+          name="name"
+          required
+        />
+      </div>
+  
+      <div>
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          [(ngModel)]="newProduct.price"
+          name="price"
+          required
+        />
+      </div>
+  
+      <div>
+        <label for="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          [(ngModel)]="newProduct.description"
+          name="description"
+          required
+        />
+      </div>
+  
+      <button
+        type="submit"
+        [disabled]="!categoryForm.form.valid"
+      >
+        {{ isEditMode ? 'Update Category' : 'Add Product' }}
+      </button>
+    </form>
+  
+    <hr />
+  
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>PRice</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm me-2"
+              (click)="deleteCategory(product.id)"
+            >
+              Delete
+            </button>
+            <button
+              class="btn btn-info btn-sm"
+              (click)="editCategory(product)"
+            >
+              Update
+            </button>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
